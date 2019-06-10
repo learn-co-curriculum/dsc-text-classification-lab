@@ -38,7 +38,7 @@ np.random.seed(0)
 
 Now, we need to fetch our dataset. Run the cell below to download all the newsgroups articles and their corresponding labels. If this is the first time working with this dataset, scikit-learn will need to download all of the articles from an external repository--the cell below may take a little while to run. 
 
-The actual dataset is quite large. To save us from extremely long runtimes, we'll work with only a subset of the classes. Here are a list of all the possible classes:
+The actual dataset is quite large. To save us from extremely long runtimes, we'll work with only a subset of the classes. Here is a list of all the possible classes:
 
 <img src='classes.png'>
 
@@ -52,7 +52,7 @@ For this lab, we'll only work with the following 5:
 
 In the cell below:
 
-* Create a list called `categories` that contains the 5 newgroups classes listed above, as strings.
+* Create a list called `categories` that contains the 5 newsgroups classes listed above, as strings.
 * Get the training set by calling `fetch_20newsgroups()` and passing in the following parameters:
     * `subset='train'`
     * `categories=categories`
@@ -881,7 +881,7 @@ articles_freqdist.most_common(200)
 
 
 
-At first glance, none of these words seem very informative--for most of the words represented here, it would be tough to guess if a given word is used equally among all 5 classes, or is disproportionately represented among a single class. This makes sense, because this frequency distribution  represents all the classes combined. This tells us that these words probably the least important, as they are most likely words that are used across mutliple classes, thereby providing our model with little actual signal as to what class they belong to. This tells us that we probably want to focus on words that appear heavily in articles from a given class, but rarely appear in articles from other classes. You may recall from previous sections that this is exactly where **_TF-IDF Vectorization_** really shines!
+At first glance, none of these words seem very informative--for most of the words represented here, it would be tough to guess if a given word is used equally among all 5 classes, or is disproportionately represented among a single class. This makes sense, because this frequency distribution  represents all the classes combined. This tells us that these words probably the least important, as they are most likely words that are used across multiple classes, thereby providing our model with little actual signal as to what class they belong to. This tells us that we probably want to focus on words that appear heavily in articles from a given class, but rarely appear in articles from other classes. You may recall from previous sections that this is exactly where **_TF-IDF Vectorization_** really shines!
 
 ## Vectorizing with TF-IDF
 
@@ -951,7 +951,7 @@ print('Percentage of columns containing 0: {}'.format(percent_sparse))
 
     Average Number of Non-Zero Elements in Vectorized Articles: 107.28038379530916
     Percentage of columns containing 0: 0.9970706028126451
-
+    
 
 As we can see from the output above, the average vectorized article contains 107 non-zero columns. This means that 99.7% of each vector is actually zeroes! This is one reason why it's best not to create your own vectorizers, and rely on professional packages such as scikit-learn and NLTK instead--they contain many speed and memory optimizations specifically for dealing with sparse vectors. This way, we aren't wasting a giant chunk of memory on a vectorized dataset that only has valid information in 0.3% of it. 
 
@@ -961,7 +961,7 @@ In the cell below:
 
 * Create a `MultinomialNB` and `RandomForestClassifier`. For the Random Forest, set `n_estimators` to `100`. Don't worry about tweaking any of the other parameters. 
 * Fit each to our vectorized training data.
-* Create predictions for our trainig and testing sets
+* Create predictions for our training and testing sets
 * Calculate the `accuracy_score` for both the training and testing sets (you'll find our training labels stored within the variable `target`, and the testing labels stored within `newsgroups_test.target`)
 
 
@@ -1007,7 +1007,7 @@ print("Training Accuracy: {:.4} \t\t Testing Accuracy: {:.4}".format(rf_train_sc
     
     Random Forest
     Training Accuracy: 0.9851 		 Testing Accuracy: 0.7896
-
+    
 
 ## Interpreting Results
 
