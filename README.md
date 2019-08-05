@@ -133,8 +133,15 @@ Do this now in the cell below.
 
 
 ```python
-
+# Your code here
 ```
+
+
+
+
+    (2814,)
+
+
 
 
 ```python
@@ -237,7 +244,7 @@ Do this now in the cell below.
 
 
 ```python
-
+processed_data[0]
 ```
 
 
@@ -985,7 +992,7 @@ This means that we need to:
 
 
 ```python
-
+# Import TfidfVectorizer
 ```
 
 
@@ -1035,8 +1042,15 @@ In the cell below, get the shape of `tf_idf_data`.
 
 
 ```python
-
+# Your code here
 ```
+
+
+
+
+    (2814, 36622)
+
+
 
 
 ```python
@@ -1178,10 +1192,23 @@ print("Training Accuracy: {:.4} \t\t Testing Accuracy: {:.4}".format(rf_train_sc
 
 **_Question:_** Interpret the results seen above. How well did the models do? How do they compare to random guessing? How would you describe the quality of the model fit?
 
-Write your answer below this line:
-_______________________________________________________________________________________________________________________________
+Write your answer below:
 
 
+```python
+# Your answer here
+```
+
+
+```python
+# __SOLUTION__
+"""
+The models did well. Since there are 5 classes, the naive accuracy rate (random guessing) would be 20%. 
+With scores of 78 and 81 percent, the models did much better than random guessing. 
+There is some evidence of overfitting, such the scores on the training set are so much higher than those of the testing set. 
+This suggests that the models' fits could be improved with some tuning.
+"""
+```
 
 # Summary
 
