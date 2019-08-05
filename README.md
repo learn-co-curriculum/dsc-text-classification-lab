@@ -14,7 +14,7 @@ You will be able to:
 * Demonstrate a working knowledge of best practices for preprocessing a dataset for text classification.
 
 
-## Getting Started
+# Getting Started
 
 For this lab, we'll be working with the classic **_Newsgroups Dataset_**, which is available as a training data set inside of `sklearn.datasets`. This dataset contains many different articles that fall into 1 of 20 possible classes. Our goal will be to build a classifier that can accurately predict the class of an article based on the features we create from the article itself!
 
@@ -112,7 +112,7 @@ newsgroups_train.filenames.shape
 
 Our dataset contains 2,814 different articles spread across the 5 classes we chose. 
 
-## Cleaning and Preprocessing Our Data
+### Cleaning and Preprocessing Our Data
 
 Now that we have our data, the fun part begins. We'll need to begin by preprocessing and cleaning our text data. As you've seen throughout this section, preprocessing text data is a bit more challenging that working with more traditional data types because there's no clear-cut answer for exactly what sort of preprocessing and cleaning we need to do. When working with traditional datasets, our goals are generally pretty clear for this stage--normalize and clean our numerical data, convert categorical data to a numeric format, check for and deal with multicollinearity, etc. The steps we take are largely dependent on what the data already looks like when we get a hold of it. Text data is different--if we inspect our dataset, we'll see that it has 1 dimension--the only existing feature in our dataset right now is one that contains all of the actual articles. This means that we need to make some decisions about how to preprocess our data. Before we can begin cleaning and preprocessing our text data, we need to make some decisions about things such as:
 
@@ -163,7 +163,7 @@ Now that we have this function, let's go ahead and preprocess our data, and then
 
 In the cell below:
 
-* Use python's `map()` function and pass in 2 parameters: the `data`, and the `process_article` function.
+* Use python's `map()` function and pass in 2 parameters: the `data`, and the `process_article` function. Make sure to wrap the whole map statement in a `list()`.
 
 **_Note:_** Running this cell may take a minute or two!
 
@@ -647,7 +647,7 @@ len(total_vocab)
 
 
 
-## Exploring Data With Frequency Distributions
+### Exploring Data With Frequency Distributions
 
 Great--our processed dataset contains 47,166 unique words! 
 
@@ -883,7 +883,7 @@ articles_freqdist.most_common(200)
 
 At first glance, none of these words seem very informative--for most of the words represented here, it would be tough to guess if a given word is used equally among all 5 classes, or is disproportionately represented among a single class. This makes sense, because this frequency distribution  represents all the classes combined. This tells us that these words probably the least important, as they are most likely words that are used across multiple classes, thereby providing our model with little actual signal as to what class they belong to. This tells us that we probably want to focus on words that appear heavily in articles from a given class, but rarely appear in articles from other classes. You may recall from previous sections that this is exactly where **_TF-IDF Vectorization_** really shines!
 
-## Vectorizing with TF-IDF
+### Vectorizing with TF-IDF
 
 Although NLTK does provide functionality for vectorizing text documents with TF-IDF, we'll make use of scikit-learn's TF-IDF vectorizer, because we already have experience with it, and because it's a bit easier to use, especially when the models we'll be feeding the vectorized data into are from scikit-learn, meaning that we don't have to worry about doing any extra processing to ensure they play nicely together. 
 
@@ -918,7 +918,7 @@ tf_idf_data_train = vectorizer.fit_transform(data)
 tf_idf_data_test = vectorizer.transform(newsgroups_test.data)
 ```
 
-## Modeling Our Data
+### Modeling Our Data
 
 Great! We've now preprocessed and explored our dataset, let's take a second to see what our data looks like in vectorized form. 
 
@@ -951,7 +951,7 @@ print('Percentage of columns containing 0: {}'.format(percent_sparse))
 
     Average Number of Non-Zero Elements in Vectorized Articles: 107.28038379530916
     Percentage of columns containing 0: 0.9970706028126451
-    
+
 
 As we can see from the output above, the average vectorized article contains 107 non-zero columns. This means that 99.7% of each vector is actually zeroes! This is one reason why it's best not to create your own vectorizers, and rely on professional packages such as scikit-learn and NLTK instead--they contain many speed and memory optimizations specifically for dealing with sparse vectors. This way, we aren't wasting a giant chunk of memory on a vectorized dataset that only has valid information in 0.3% of it. 
 
@@ -1007,18 +1007,24 @@ print("Training Accuracy: {:.4} \t\t Testing Accuracy: {:.4}".format(rf_train_sc
     
     Random Forest
     Training Accuracy: 0.9851 		 Testing Accuracy: 0.7896
-    
 
-## Interpreting Results
+
+### Interpreting Results
 
 **_Question:_** Interpret the results seen above. How well did the models do? How do they compare to random guessing? How would you describe the quality of the model fit?
 
-Write your answer below this line:
-_______________________________________________________________________________________________________________________________
-
-The models did well. Since there are 5 classes, the naive accuracy rate (random guessing) would be 20%. With scores of 78 and 81 percent, the models did much better than random guessing. There is some evidence of overfitting, such the scores on the training set are so much higher than those of the testing set. This suggests that the models' fits could be improved with some tuning. 
+Write your answer below:
 
 
-## Summary
+```python
+"""
+The models did well. Since there are 5 classes, the naive accuracy rate (random guessing) would be 20%. 
+With scores of 78 and 81 percent, the models did much better than random guessing. 
+There is some evidence of overfitting, such the scores on the training set are so much higher than those of the testing set. 
+This suggests that the models' fits could be improved with some tuning.
+"""
+```
+
+# Summary
 
 In this lab, we used our NLP skills to clean, preprocess, explore, and fit models to text data for classification. This wasn't easy--great job!!
