@@ -86,6 +86,18 @@ Finally, let's check the shape of `data` to see what our data looks like. We can
 
 Do this now in the cell below.
 
+
+```python
+# Your code here
+```
+
+
+
+
+    (2814,)
+
+
+
 Our dataset contains 2,814 different articles spread across the 5 classes we chose. 
 
 ### Cleaning and Preprocessing Our Data
@@ -150,6 +162,11 @@ Great. Now, let's inspect the first article inside of `processed_data` to see ho
 
 Do this now in the cell below.
 
+
+```python
+processed_data[0]
+```
+
 Now, let's move onto exploring the dataset a bit more. Let's start by getting the total vocabulary size of the training dataset. We can do this by creating a `set` object and then using it's `.update()` method to iteratively add each article. Since it's a set, it will only contain unique words, with no duplicates. 
 
 In the cell below:
@@ -209,6 +226,11 @@ This means that we need to:
 
 
 ```python
+# Import TfidfVectorizer
+```
+
+
+```python
 vectorizer = None
 ```
 
@@ -227,6 +249,18 @@ tf_idf_data_test = None
 Great! We've now preprocessed and explored our dataset, let's take a second to see what our data looks like in vectorized form. 
 
 In the cell below, get the shape of `tf_idf_data`.
+
+
+```python
+# Your code here
+```
+
+
+
+
+    (2814, 36622)
+
+
 
 Our vectorized data contains 2,814 articles, with 36,622 unique words in the vocabulary. However, the vast majority of these columns for any given article will be zero, since every article only contains a small subset of the total vocabulary. Recall that vectors mostly filled with zeros are referred to as **_Sparse Vectors_**. These are extremely common when working with text data. 
 
@@ -292,10 +326,12 @@ print("Training Accuracy: {:.4} \t\t Testing Accuracy: {:.4}".format(rf_train_sc
 
 **_Question:_** Interpret the results seen above. How well did the models do? How do they compare to random guessing? How would you describe the quality of the model fit?
 
-Write your answer below this line:
-_______________________________________________________________________________________________________________________________
+Write your answer below:
 
 
+```python
+# Your answer here
+```
 
 # Summary
 
