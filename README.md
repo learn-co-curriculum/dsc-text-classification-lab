@@ -183,7 +183,7 @@ total_vocab = None
 
 ### Exploring Data With Frequency Distributions
 
-Great--our processed dataset contains 47,166 unique words! 
+Great--our processed dataset contains 46,990 unique words! 
 
 Next, let's create a Frequency Distribution to see which words are used the most! 
 
