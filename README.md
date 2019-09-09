@@ -185,6 +185,7 @@ processed_data[0]
 
 
     ['note',
+     'these',
      'trial',
      'updates',
      'summarized',
@@ -230,6 +231,7 @@ processed_data[0]
      'moved',
      'mistrial',
      'denied',
+     'the',
      'day',
      'marked',
      'caustic',
@@ -278,9 +280,11 @@ processed_data[0]
      'court',
      'cooper',
      'conceded',
+     'you',
      'things',
      'compressed',
      'seconds',
+     'it',
      "'s",
      'difficult',
      'remember',
@@ -296,6 +300,7 @@ processed_data[0]
      'gun',
      'silenced',
      'barrel',
+     'i',
      'thought',
      'colt',
      'commando',
@@ -314,6 +319,7 @@ processed_data[0]
      'weaver',
      "'s",
      'dog',
+     'when',
      'spence',
      'asked',
      'seven',
@@ -348,6 +354,7 @@ processed_data[0]
      'events',
      'cooper',
      'responded',
+     'if',
      "'re",
      'implying',
      'got',
@@ -422,12 +429,14 @@ processed_data[0]
      'proceded',
      'admonish',
      'attorneys',
+     'i',
      "'m",
      'going',
      'play',
      'games',
      'either',
      'counsel',
+     'this',
      'personality',
      'problem',
      'day',
@@ -439,6 +448,7 @@ processed_data[0]
      'spence',
      'told',
      'judge',
+     'when',
      'evidence',
      "'ll",
      'see',
@@ -453,6 +463,7 @@ processed_data[0]
      'events',
      'spence',
      'continued',
+     'we',
      "'re",
      'going',
      'find',
@@ -478,12 +489,14 @@ processed_data[0]
      'prevent',
      'fair',
      'trial',
+     'we',
      'ca',
      "n't",
      'fair',
      'trial',
      'jury',
      'believes',
+     'i',
      "'m",
      'sort',
      'charlatan',
@@ -520,6 +533,7 @@ processed_data[0]
      'restrict',
      'comments',
      'objecting',
+     'the',
      'trial',
      'resumed',
      'prosecution',
@@ -529,6 +543,7 @@ processed_data[0]
      'agent',
      'greg',
      'rampton',
+     'the',
      'prosecution',
      "'s",
      'purpose',
@@ -593,12 +608,15 @@ processed_data[0]
      'said',
      'could',
      'remember',
+     'he',
      'stated',
+     'i',
      'conduct',
      'primary',
      'interview',
      'deputy',
      'cooper',
+     'i',
      'conversations',
      'since',
      'interview',
@@ -620,13 +638,12 @@ total_vocab = set()
 for comment in processed_data:
     total_vocab.update(comment)
 len(total_vocab)
-# 47033
 ```
 
 
 
 
-    47033
+    47166
 
 
 
@@ -662,7 +679,9 @@ articles_freqdist.most_common(200)
 
 
     [('--', 29501),
+     ('i', 7706),
      ('x', 4833),
+     ('the', 3702),
      ("'s", 3203),
      ("n't", 2933),
      ('1', 2524),
@@ -671,22 +690,30 @@ articles_freqdist.most_common(200)
      ('one', 1758),
      ('2', 1659),
      ('people', 1243),
+     ('it', 1218),
+     ('if', 1167),
      ('use', 1146),
+     ('this', 1096),
      ('get', 1068),
      ('like', 1036),
+     ('a', 1031),
      ('file', 1024),
      ('3', 1002),
      ('also', 875),
      ('key', 869),
      ('4', 857),
      ('could', 853),
+     ('what', 824),
      ('know', 814),
      ('think', 814),
      ('time', 781),
+     ('in', 757),
      ('may', 729),
      ('even', 711),
      ('new', 706),
+     ('and', 689),
      ('first', 678),
+     ('you', 675),
      ('*/', 674),
      ('system', 673),
      ('well', 670),
@@ -710,6 +737,7 @@ articles_freqdist.most_common(200)
      ('much', 540),
      ('encryption', 537),
      ('6', 532),
+     ('but', 529),
      ('using', 527),
      ('say', 523),
      ('gun', 520),
@@ -719,12 +747,18 @@ articles_freqdist.most_common(200)
      ('team', 498),
      ('must', 483),
      ('law', 476),
+     ('how', 465),
+     ('there', 452),
      ('since', 449),
+     ('we', 444),
      ('need', 444),
+     ('they', 441),
+     ('for', 441),
      ('game', 439),
      ('chip', 437),
      ('something', 435),
      ('8', 426),
+     ('to', 424),
      ('want', 421),
      ('god', 419),
      ('server', 417),
@@ -744,7 +778,9 @@ articles_freqdist.most_common(200)
      ('go', 377),
      ('take', 377),
      ('really', 376),
+     ('of', 375),
      ('version', 374),
+     ('that', 372),
      ('anyone', 371),
      ('second', 370),
      ('c', 369),
@@ -767,18 +803,22 @@ articles_freqdist.most_common(200)
      ('however', 344),
      ('case', 343),
      ('still', 342),
+     ('no', 341),
      ('back', 341),
      ('entry', 341),
+     ('he', 340),
      ('hockey', 340),
      ('last', 339),
      ('10', 339),
      ("'d", 335),
      ('let', 333),
      ('better', 332),
+     ('as', 331),
      ('25', 331),
      ('part', 330),
      ('security', 327),
      ('output', 327),
+     ('so', 325),
      ('probably', 324),
      ('subject', 322),
      ('line', 321),
@@ -787,6 +827,7 @@ articles_freqdist.most_common(200)
      ('going', 319),
      ('period', 315),
      ('state', 312),
+     ('is', 311),
      ('course', 311),
      ('name', 311),
      ('anonymous', 307),
@@ -809,10 +850,12 @@ articles_freqdist.most_common(200)
      ('help', 282),
      ('message', 280),
      ('55.0', 279),
+     ('m', 278),
      ('games', 276),
      ('thing', 276),
      ('never', 275),
      ('following', 274),
+     ('why', 273),
      ('send', 273),
      ('try', 271),
      ('best', 270),
@@ -834,33 +877,7 @@ articles_freqdist.most_common(200)
      ('different', 261),
      ('guns', 259),
      ('enough', 259),
-     ('given', 256),
-     ('far', 255),
-     ('come', 254),
-     ('group', 253),
-     ('seems', 252),
-     ('around', 250),
-     ('person', 249),
-     ('order', 249),
-     ('call', 248),
-     ('next', 246),
-     ('support', 246),
-     ('anything', 245),
-     ('least', 244),
-     ('section', 240),
-     ('e', 240),
-     ('internet', 238),
-     ('power', 236),
-     ('open', 235),
-     ('sun', 235),
-     ('etc', 234),
-     ('world', 233),
-     ('user', 231),
-     ('mail', 231),
-     ('rights', 229),
-     ('great', 229),
-     ('real', 229),
-     ('nhl', 227)]
+     ('given', 256)]
 
 
 
@@ -934,7 +951,7 @@ print('Percentage of columns containing 0: {}'.format(percent_sparse))
 
     Average Number of Non-Zero Elements in Vectorized Articles: 107.28038379530916
     Percentage of columns containing 0: 0.9970706028126451
-    
+
 
 As we can see from the output above, the average vectorized article contains 107 non-zero columns. This means that 99.7% of each vector is actually zeroes! This is one reason why it's best not to create your own vectorizers, and rely on professional packages such as scikit-learn and NLTK instead--they contain many speed and memory optimizations specifically for dealing with sparse vectors. This way, we aren't wasting a giant chunk of memory on a vectorized dataset that only has valid information in 0.3% of it. 
 
@@ -990,7 +1007,7 @@ print("Training Accuracy: {:.4} \t\t Testing Accuracy: {:.4}".format(rf_train_sc
     
     Random Forest
     Training Accuracy: 0.9851 		 Testing Accuracy: 0.7896
-    
+
 
 ### Interpreting Results
 
