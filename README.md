@@ -215,7 +215,7 @@ def process_article(article):
 # __SOLUTION__ 
 def process_article(article):
     tokens = nltk.word_tokenize(article)
-    stopwords_removed = [token.lower() for token in tokens if token not in stopwords_list]
+    stopwords_removed = [token.lower() for token in tokens if token.lower() not in stopwords_list]
     return stopwords_removed    
 ```
 
