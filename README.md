@@ -9,14 +9,14 @@ In this lab, we'll use everything we've learned so far to build a model that can
 
 You will be able to:
 
-* Generate and select appropriate features from a corpus for text classification using NLTK
-* Preprocess, tokenize, and vectorize a dataset using professional tools such as NLTK and scikit-learn
-* Demonstrate a working knowledge of best practices for preprocessing a dataset for text classification.
+- Perform classification using a text dataset, using sensible preprocessing, tokenization, and feature engineering scheme 
+- Use scikit-learn text vectorizers to fit and transform text data into a format to be used in a ML model 
+
 
 
 # Getting Started
 
-For this lab, we'll be working with the classic **_Newsgroups Dataset_**, which is available as a training data set inside of `sklearn.datasets`. This dataset contains many different articles that fall into 1 of 20 possible classes. Our goal will be to build a classifier that can accurately predict the class of an article based on the features we create from the article itself!
+For this lab, we'll be working with the classic **_Newsgroups Dataset_**, which is available as a training data set in `sklearn.datasets`. This dataset contains many different articles that fall into 1 of 20 possible classes. Our goal will be to build a classifier that can accurately predict the class of an article based on the features we create from the article itself!
 
 Let's get started. Run the cell below to import everything we'll need for this lab. 
 
@@ -36,13 +36,13 @@ import numpy as np
 np.random.seed(0)
 ```
 
-Now, we need to fetch our dataset. Run the cell below to download all the newsgroups articles and their corresponding labels. If this is the first time working with this dataset, scikit-learn will need to download all of the articles from an external repository--the cell below may take a little while to run. 
+Now, we need to fetch our dataset. Run the cell below to download all the newsgroups articles and their corresponding labels. If this is the first time working with this dataset, scikit-learn will need to download all of the articles from an external repository -- the cell below may take a little while to run. 
 
 The actual dataset is quite large. To save us from extremely long runtimes, we'll work with only a subset of the classes. Here is a list of all the possible classes:
 
 <img src='classes.png'>
 
-For this lab, we'll only work with the following 5:
+For this lab, we'll only work with the following five:
 
 * `'alt.atheism'`
 * `'comp.windows.x'`
@@ -52,11 +52,11 @@ For this lab, we'll only work with the following 5:
 
 In the cell below:
 
-* Create a list called `categories` that contains the 5 newsgroups classes listed above, as strings.
+* Create a list called `categories` that contains the five newsgroups classes listed above, as strings 
 * Get the training set by calling `fetch_20newsgroups()` and passing in the following parameters:
     * `subset='train'`
     * `categories=categories`
-    * `remove=('headers', 'footers', 'quotes')`--this is so that the model can't overfit to metadata included in the articles that sometimes acts as a dead-giveaway as to what class the article belongs to. 
+    * `remove=('headers', 'footers', 'quotes')` -- this is so that the model can't overfit to metadata included in the articles that sometimes acts as a dead-giveaway as to what class the article belongs to  
 * Get the testing set as well by passing in the same parameters, with the exception of `subset='test` 
 
 
@@ -66,20 +66,21 @@ newsgroups_train = None
 newsgroups_test = None
 ```
 
-Great! Now that we have our data, let's break apart the data and the labels, and then inspect the class names to see what the actual newsgroups are.
+Great! Let's break apart the data and the labels, and then inspect the class names to see what the actual newsgroups are.
 
 In the cell below:
 
-* Grab the data from `newsgroups_train.data` and store it in the appropriate variable. 
-* Grab the labels from `newsgroups_train.target` and store it in the appropriate variable. 
-* Grab the label names from `newsgroups_train.target_names` and store it in the appropriate variable. 
-* Display the `label_names` so that we can see the different classes of articles that we're working with, and confirm that we grabbed the right ones. 
+* Grab the data from `newsgroups_train.data` and store it in the appropriate variable  
+* Grab the labels from `newsgroups_train.target` and store it in the appropriate variable  
+* Grab the label names from `newsgroups_train.target_names` and store it in the appropriate variable  
+* Display the `label_names` so that we can see the different classes of articles that we're working with, and confirm that we grabbed the right ones  
 
 
 ```python
 data = None
 target = None
 label_names = None
+label_names
 ```
 
 Finally, let's check the shape of `data` to see what our data looks like. We can do this by checking the `.shape` attribute of `newsgroups_train.filenames`.
@@ -98,13 +99,13 @@ Do this now in the cell below.
 
 
 
-Our dataset contains 2,814 different articles spread across the 5 classes we chose. 
+Our dataset contains 2,814 different articles spread across the five classes we chose. 
 
 ### Cleaning and Preprocessing Our Data
 
-Now that we have our data, the fun part begins. We'll need to begin by preprocessing and cleaning our text data. As you've seen throughout this section, preprocessing text data is a bit more challenging that working with more traditional data types because there's no clear-cut answer for exactly what sort of preprocessing and cleaning we need to do. When working with traditional datasets, our goals are generally pretty clear for this stage--normalize and clean our numerical data, convert categorical data to a numeric format, check for and deal with multicollinearity, etc. The steps we take are largely dependent on what the data already looks like when we get a hold of it. Text data is different--if we inspect our dataset, we'll see that it has 1 dimension--the only existing feature in our dataset right now is one that contains all of the actual articles. This means that we need to make some decisions about how to preprocess our data. Before we can begin cleaning and preprocessing our text data, we need to make some decisions about things such as:
+Now that we have our data, the fun part begins. We'll need to begin by preprocessing and cleaning our text data. As you've seen throughout this section, preprocessing text data is a bit more challenging that working with more traditional data types because there's no clear-cut answer for exactly what sort of preprocessing and cleaning we need to do. Before we can begin cleaning and preprocessing our text data, we need to make some decisions about things such as:
 
-* Do we remove stop words, or not?
+* Do we remove stop words or not?
 * Do we stem or lemmatize our text data, or leave the words as is?
 * Is basic tokenization enough, or do we need to support special edge cases through the use of regex?
 * Do we use the entire vocabulary, or just limit the model to a subset of the most frequently used words? If so, how many?
@@ -118,10 +119,10 @@ Let's get right into it. We'll start by getting a list of all of the english sto
 
 In the cell below:
 
-* Get all the english stopwords from nltk.
-* Get all of the punctuation from `string.punctuation`, and convert it to a list.
-* Add the two lists together. Name the result `stopwords_list`.
-* Create another list containing various types of empty strings and ellipses, such as `["''", '""', '...', '``']`. Add this to our `stopwords_list`, so that we won't have tokens that are only empty quotes and such. 
+* Get all the english stopwords from `nltk` 
+* Get all of the punctuation from `string.punctuation`, and convert it to a list 
+* Add the two lists together. Name the result `stopwords_list` 
+* Create another list containing various types of empty strings and ellipses, such as `["''", '""', '...', '``']`. Add this to our `stopwords_list`, so that we won't have tokens that are only empty quotes and such  
 
 
 ```python
@@ -131,13 +132,13 @@ stopwords_list = None
 
 Great! We'll leave these alone for now, until we're ready to remove stop words after the tokenization step. 
 
-Next, let's try tokenizing our dataset. In order to save ourselves some time, we'll write a function to clean our dataset, and then use python's built-in `map` function to clean every article in the dataset at the same time. 
+Next, let's try tokenizing our dataset. In order to save ourselves some time, we'll write a function to clean our dataset, and then use Python's built-in `map()` function to clean every article in the dataset at the same time. 
 
 In the cell below, complete the `process_article()` function. This function should:
 
-* Takes in one parameter, `article`
-* Tokenize the article using the appropriate function from nltk. 
-* Lowercase every token, remove any stopwords found in `stopwords_list` from the tokenized article, and return the results. 
+* Take in one parameter, `article` 
+* Tokenize the article using the appropriate function from `nltk` 
+* Lowercase every token, remove any stopwords found in `stopwords_list` from the tokenized article, and return the results 
 
 
 ```python
@@ -149,7 +150,7 @@ Now that we have this function, let's go ahead and preprocess our data, and then
 
 In the cell below:
 
-* Use python's `map()` function and pass in 2 parameters: the `data`, and the `process_article` function. Make sure to wrap the whole map statement in a `list()`.
+* Use Python's `map()` function and pass in two parameters: the `process_article` function and the `data`. Make sure to wrap the whole map statement in a `list()`.
 
 **_Note:_** Running this cell may take a minute or two!
 
@@ -158,7 +159,7 @@ In the cell below:
 processed_data = None
 ```
 
-Great. Now, let's inspect the first article inside of `processed_data` to see how it looks. 
+Great. Now, let's inspect the first article in `processed_data` to see how it looks. 
 
 Do this now in the cell below.
 
@@ -171,9 +172,9 @@ Now, let's move onto exploring the dataset a bit more. Let's start by getting th
 
 In the cell below:
 
-* Create a `set` object called `total_vocab`.
-* Iterate through each tokenized article in `processed_data` and add it to the set using the set's `.update()` method.
-* Once all articles have been added, get the total number of unique words in our training set by taking the length of the set.
+* Create a `set()` object called `total_vocab` 
+* Iterate through each tokenized article in `processed_data` and add it to the set using the set's `.update()` method 
+* Once all articles have been added, get the total number of unique words in our training set by taking the length of the set 
 
 
 ```python
@@ -183,18 +184,18 @@ total_vocab = None
 
 ### Exploring Data With Frequency Distributions
 
-Great--our processed dataset contains 46,990 unique words! 
+Great -- our processed dataset contains 46,990 unique words! 
 
-Next, let's create a Frequency Distribution to see which words are used the most! 
+Next, let's create a frequency distribution to see which words are used the most! 
 
-In order to do this, we'll need to concatenate every article into a single list, and then pass this list into a `FreqDist()` object. 
+In order to do this, we'll need to concatenate every article into a single list, and then pass this list to `FreqDist()`. 
 
 In the cell below:
 
-* Create an empty list called `articles_concat`
-* Iterate through `processed_data` and add every article it contains to `articles_concat`
-* Create a `FreqDist` object and pass in `articles_concat` as the input. 
-* Display the top 200 most used words. 
+* Create an empty list called `articles_concat` 
+* Iterate through `processed_data` and add every article it contains to `articles_concat` 
+* Pass `articles_concat` as input to `FreqDist()`  
+* Display the top 200 most used words  
 
 
 ```python
@@ -207,18 +208,18 @@ articles_freqdist = None
 
 ```
 
-At first glance, none of these words seem very informative--for most of the words represented here, it would be tough to guess if a given word is used equally among all 5 classes, or is disproportionately represented among a single class. This makes sense, because this frequency distribution  represents all the classes combined. This tells us that these words probably the least important, as they are most likely words that are used across multiple classes, thereby providing our model with little actual signal as to what class they belong to. This tells us that we probably want to focus on words that appear heavily in articles from a given class, but rarely appear in articles from other classes. You may recall from previous sections that this is exactly where **_TF-IDF Vectorization_** really shines!
+At first glance, none of these words seem very informative -- for most of the words represented here, it would be tough to guess if a given word is used equally among all five classes, or is disproportionately represented among a single class. This makes sense, because this frequency distribution represents all the classes combined. This tells us that these words are probably the least important, as they are most likely words that are used across multiple classes, thereby providing our model with little actual signal as to what class they belong to. This tells us that we probably want to focus on words that appear heavily in articles from a given class, but rarely appear in articles from other classes. You may recall from previous lessons that this is exactly where **_TF-IDF Vectorization_** really shines!
 
 ### Vectorizing with TF-IDF
 
 Although NLTK does provide functionality for vectorizing text documents with TF-IDF, we'll make use of scikit-learn's TF-IDF vectorizer, because we already have experience with it, and because it's a bit easier to use, especially when the models we'll be feeding the vectorized data into are from scikit-learn, meaning that we don't have to worry about doing any extra processing to ensure they play nicely together. 
 
-Recall that in order to use scikit-learn's `TfidfVectorizer`, we need to pass in the data as raw text documents--the `TfidfVectorizer` handles the Count Vectorization process on it's own, and then fits and transforms the data into TF-IDF format. 
+Recall that in order to use scikit-learn's `TfidfVectorizer()`, we need to pass in the data as raw text documents -- the `TfidfVectorizer()` handles the count vectorization process on it's own, and then fits and transforms the data into TF-IDF format. 
 
 This means that we need to:
 
-* Import `TfidfVectorizer` from `sklearn.feature_extraction.text` and instantiate a `TfidfVectorizer` object
-* Call the vectorizer object's `fit_transform()` method and pass in our `data` as input. Store the results in `tf_idf_data_train`.
+* Import `TfidfVectorizer` from `sklearn.feature_extraction.text` and instantiate `TfidfVectorizer()` 
+* Call the vectorizer object's `.fit_transform()` method and pass in our `data` as input. Store the results in `tf_idf_data_train` 
 * Also create a vectorized version of our testing data, which can be found in `newsgroups_test.data`. Store the results in `tf_idf_data_test`. 
 
 
@@ -275,16 +276,16 @@ percent_sparse = 1 - (non_zero_cols / float(tf_idf_data_train.shape[1]))
 print('Percentage of columns containing 0: {}'.format(percent_sparse))
 ```
 
-As we can see from the output above, the average vectorized article contains 107 non-zero columns. This means that 99.7% of each vector is actually zeroes! This is one reason why it's best not to create your own vectorizers, and rely on professional packages such as scikit-learn and NLTK instead--they contain many speed and memory optimizations specifically for dealing with sparse vectors. This way, we aren't wasting a giant chunk of memory on a vectorized dataset that only has valid information in 0.3% of it. 
+As we can see from the output above, the average vectorized article contains 107 non-zero columns. This means that 99.7% of each vector is actually zeroes! This is one reason why it's best not to create your own vectorizers, and rely on professional packages such as scikit-learn and NLTK instead -- they contain many speed and memory optimizations specifically for dealing with sparse vectors. This way, we aren't wasting a giant chunk of memory on a vectorized dataset that only has valid information in 0.3% of it. 
 
 Now that we've vectorized our dataset, let's create some models and fit them to our vectorized training data. 
 
 In the cell below:
 
-* Create a `MultinomialNB` and `RandomForestClassifier`. For the Random Forest, set `n_estimators` to `100`. Don't worry about tweaking any of the other parameters. 
-* Fit each to our vectorized training data.
-* Create predictions for our training and testing sets
-* Calculate the `accuracy_score` for both the training and testing sets (you'll find our training labels stored within the variable `target`, and the testing labels stored within `newsgroups_test.target`)
+* Instantiate `MultinomialNB()` and `RandomForestClassifier()`. For random forest, set `n_estimators` to `100`. Don't worry about tweaking any of the other parameters  
+* Fit each to our vectorized training data 
+* Create predictions for our training and test sets
+* Calculate the `accuracy_score()` for both the training and test sets (you'll find our training labels stored within the variable `target`, and the test labels stored within `newsgroups_test.target`) 
 
 
 ```python
@@ -335,4 +336,4 @@ Write your answer below:
 
 # Summary
 
-In this lab, we used our NLP skills to clean, preprocess, explore, and fit models to text data for classification. This wasn't easy--great job!!
+In this lab, we used our NLP skills to clean, preprocess, explore, and fit models to text data for classification. This wasn't easy -- great job!!
